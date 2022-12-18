@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  div(class='vh-100 container' style='background-color:#AAA')
+    form
+      div.form-group
+        label(for='the_text_area') Type a message here
+        textarea( id='the_text_area' class='form-control' rows=5) 
+        
+      div.form-group
+        button( id='the_button' type='button' class='btn btn-primary') Primary
+        textarea( id='the_response' class='form-control' placeholder='response' readonly rows=5)
+
+        script.
+          var conv_id, message_id;
+          $('#the_button').prop('disabled', true )
+          $('#the_text_area').bind( 'input propertychange', function() {
+            $('#the_button').prop( 'disabled', this.value.length == 0 )
+          })
+          $('#the_button').click( function() {
+            $.ajax({
+              url: './send_message',
+              data: {
+                message: $('#the_text_area').val(),
+                conv_id: conv_id,
+                message_id: message_id
+              },
+              success: function( result ) {
+                conv_id = result.conversationId;
+                message_id = result.messageId;
+                $('#the_response').val( result.response );
+                console.log( result.response )
+              }
+            })
+          })
+
