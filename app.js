@@ -5,13 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('dotenv').config();
 
-
-// require('./thing.mjs');
-// import( './thing.mjs');
-// require('./stuff/chat')
-// import('./stuff/chat');
-// import {example} from './stuff/chat'
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 

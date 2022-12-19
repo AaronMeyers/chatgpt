@@ -20,12 +20,14 @@ block content
           $('#the_button').click( function() {
             $.ajax({
               url: './send_message',
+              method: 'POST',
               data: {
                 message: $('#the_text_area').val(),
-                conv_id: conv_id,
-                message_id: message_id
+                conversationId: conv_id,
+                parentMessageId: message_id
               },
               success: function( result ) {
+                console.log( result );
                 conv_id = result.conversationId;
                 message_id = result.messageId;
                 $('#the_response').val( result.response );
